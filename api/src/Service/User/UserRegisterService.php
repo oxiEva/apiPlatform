@@ -14,7 +14,6 @@ use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp;
 use Symfony\Component\Messenger\MessageBusInterface;
-use function PHPUnit\Framework\never;
 
 class UserRegisterService
 {
