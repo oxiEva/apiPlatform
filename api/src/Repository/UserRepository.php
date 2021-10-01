@@ -14,6 +14,7 @@ class UserRepository extends BaseRepository
     {
         return User::class;
     }
+
     /**
      * @throws UserNotFoundException|\Exception
      */
@@ -21,6 +22,18 @@ class UserRepository extends BaseRepository
     {
         if (null === $user = $this->objectRepository->findOneBy(['email' => $email])) {
             throw UserNotFoundException::fromEmail($email);
+        }
+
+        return $user;
+    }
+
+    /**
+     * @throws UserNotFoundException|\Exception
+     */
+    public function findOneInactiveByIdAndTokenOrFail(string $id, string $token): User
+    {
+        if (null === $user = $this->objectRepository->findOneBy(['id' => $id, 'token' => $token, 'active' => false])) {
+            throw UserNotFoundException::fromUserIdAndToken($id, $token);
         }
 
         return $user;

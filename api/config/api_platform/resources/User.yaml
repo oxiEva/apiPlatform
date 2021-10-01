@@ -41,3 +41,17 @@ App\Entity\User:
     itemOperations:
         get:
             method: GET
+            openapi_context:
+                summary: Retrieves a user resource
+        activate:
+            method: PUT
+            path: /users/{id}/activate
+            controller: App\Api\Action\User\ActivateAccount
+            #Pq al ser mètode PUT no ens demani els params required
+            deserialize: false
+            denormalization_context:
+                groups: [ user_activate ]
+            openapi_context:
+                summary: Activate a user
+
+
