@@ -21,6 +21,12 @@ class JsonExceptionResponseTransformerListener
                 'code' => $exception->getStatusCode(),
                 'message' => $exception->getMessage()
             ];
+        }else{
+            $data = [
+                'class' => get_class($exception),
+                'code' => 500,
+                'message' => $exception->getMessage()
+            ];
         }
 
         $event->setResponse($this->prepareResponse($data, $data['code']));
