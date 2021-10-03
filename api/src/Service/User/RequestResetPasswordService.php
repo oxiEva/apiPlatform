@@ -33,6 +33,8 @@ class RequestResetPasswordService
         $user = $this->userRepository->findOneByEmailOrFail(RequestService::getField($request, 'email'));
         $user->setResetPasswordToken(sha1(uniqid("", true)));
 
+        $this->userRepository->save($user);
+
         $this->messageBus->dispatch(
             new RequestResetPasswordMessage(
                 $user->getId(),
